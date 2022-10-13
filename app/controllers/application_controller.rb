@@ -3,5 +3,19 @@ class ApplicationController < ActionController::API
     def hello_world
         session[:count] = (session[:count] || 0) + 1
         render json: { count: session[:count] }
-      end
+    end
+    
+    def current_user
+        @user ||= User.find(session[:user_id])
+    end
+
+    private 
+
+    def invalid(e)
+        render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+    end
+
+    def not_found(e)
+        render json: {error: "#{e.model} not found"}, status: :not_found
+    end
 end
