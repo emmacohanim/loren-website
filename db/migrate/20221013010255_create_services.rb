@@ -1,7 +1,7 @@
 class CreateServices < ActiveRecord::Migration[7.0]
   def change
     create_table :services do |t|
-      t.string :type
+      t.string :type_of_service
       t.integer :rate_base
       t.integer :rate_avg
       t.integer :rate_additional

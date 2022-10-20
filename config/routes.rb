@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :packages, only: [:index, :show]
   resources :subscriptions
   resources :services, only: [:index, :show]
   resources :users, only: [:create, :update, :show]
@@ -6,7 +7,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get '/hello', to: 'application#hello_world'
+  # get '/hello', to: 'application#hello_world'
 
   # user routes
   post '/login', to: 'sessions#create'
@@ -19,7 +20,4 @@ Rails.application.routes.draw do
   get '/my_account/subscriptions', to: 'subscriptions#index'
   post '/purchase_subscription', to: 'subscriptions#create'
   delete '/my_account/subscriptions/cancel', to:'subscriptions#destroy'
-
-  # service routes
-  get '/services', to: 'services#index'
 end

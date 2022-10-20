@@ -1,4 +1,4 @@
 class Service < ApplicationRecord
-    has_many :subscriptions
-    has_many :users, through: :subscriptions
+    has_many :packages
+    has_many :subscriptions, through: :packages
 end

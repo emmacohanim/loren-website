@@ -22,6 +22,7 @@ module LorenProject
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.api_only = true
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -42,6 +43,5 @@ module LorenProject
     # Use SameSite=Strict for all cookies to help protect against CSRF
     config.action_dispatch.cookies_same_site_protection = :strict
 
-    config.api_only = true
   end
 end

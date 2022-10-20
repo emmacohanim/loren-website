@@ -7,7 +7,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.string :gender
       t.string :email
-
+      t.string :phone
+      t.string :preferred_contact_method
       t.timestamps
     end
   end
