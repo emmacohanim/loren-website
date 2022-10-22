@@ -5,7 +5,7 @@ function Service({service, options}) {
 
 
 return (
-    <div id="service">
+    <div className="service">
         <h3>{service.type_of_service}</h3>
         <p>{service.description}</p>
         {service.duration_of_session_in_minutes ? <p>{service.duration_of_session_in_minutes} minutes per session</p> : null}

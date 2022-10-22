@@ -1,7 +1,10 @@
 import React, { useState, useEffect} from 'react';
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Radio } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css'
 import { useNavigate} from 'react-router-dom'
+
+// state for all form values is set, but submitted form returns first/last name blank error
+// submit handler should be setting errors and rendering errors to user 
 
 function SignUp({onLogin, isLoggedIn}) {
     const navigate = useNavigate();
@@ -31,6 +34,7 @@ function SignUp({onLogin, isLoggedIn}) {
     }
 
     function handleSubmit(e) {
+        debugger
         e.preventDefault()
         setErrors([])
         fetch("/signup", {
@@ -143,19 +147,25 @@ function SignUp({onLogin, isLoggedIn}) {
                         placeholder="10-digit phone number"
                         label="Phone"
                     />
-                    <label>Preferred Method of Contact</label>
-                    <Form.Input
-                        label='Email'
-                        control='input'
-                        type='radio'
-                        name='htmlRadios'
-                    />
-                    <Form.Input
-                        label='Phone'
-                        control='input'
-                        type='radio'
-                        name='htmlRadios'
-                    />
+                    <div>
+          <label>Preferred Method of Contact</label>
+          <Radio
+            value="email"
+            label="Email"
+            control="input"
+            name="contact"
+            checked={preferredContactMethod === "email"}
+            onChange={(_e, { value }) => setPreferredContactMethod(value)}
+          />
+          <Radio
+            value="phone"
+            label="Phone"
+            control="input"
+            name="contact"
+            checked={preferredContactMethod === "phone"}
+            onChange={(_e, { value }) => setPreferredContactMethod(value)}
+          />
+        </div>
                 </Form.Group>
         <Button type="submit">Sign Up</Button>
       </Form>

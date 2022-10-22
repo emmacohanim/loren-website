@@ -5,8 +5,8 @@ function NavBarLoggedIn() {
   return (
     <div>
       <nav id="nav-bar-logged-in">
-        <Link className="link-my-account" to="/my-account">My Account</Link>
-        <Link className="link-log-out" to="/log-out">Log Out</Link>
+        <Link className="link-logged-in" to="/my-account">My Account</Link>
+        <Link className="link-logged-in" to="/log-out">Log Out</Link>
       </nav>
     </div>
   );

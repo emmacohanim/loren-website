@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import './App.css';
+import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import { useNavigate} from 'react-router-dom';
 import NavBarLoggedOut from "./NavBarLoggedOut";
@@ -27,13 +28,13 @@ function App() {
     fetch('/my_account').then(r=>r.json().then(data => {
       if (r.ok){
       setUser(data);
-      return (
-        <NavBarLoggedIn />
-      )
-      } else {
-        return (
-          <NavBarLoggedOut />
-        )
+      // return (
+      //   <NavBarLoggedIn />
+      // )
+      // } else {
+      //   return (
+      //     <NavBarLoggedOut />
+      //   )
       }
     }))
   }, [])
@@ -49,6 +50,8 @@ function App() {
 
   return (
     <div className="App">
+      <NavBarLoggedOut />
+      <NavBarLoggedIn />
       <NavBar/>
       <Routes>
         <Route className="route" path="/" element={<Home />} />

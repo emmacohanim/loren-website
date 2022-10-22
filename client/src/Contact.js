@@ -3,10 +3,10 @@ import { Form, Button, Radio } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { sendForm, send } from "emailjs-com";
 import emailjs from '@emailjs/browser';
-// is this the right id?
+
+// message is being sent, but nothing else is
 
 function Contact() {
-  // use effect fetch for services
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -55,7 +55,7 @@ function Contact() {
        alert("Inquiry submitted!")
     }, function(error) {
        console.log('FAILED...', error);
-       alert("There was a problem with your inquiry. Please try again")
+       alert({errors})
     });
     // sendForm("default_service", "template_kpowdaa", "#contact-form").then(
     //   function (response) {

@@ -13,6 +13,7 @@ function Services() {
 
     return (
         <div>
+          <h1>Services</h1>
             {services.map(service=> {
               return <Service service={service} options={service.packages}/>
               
