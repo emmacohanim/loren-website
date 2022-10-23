@@ -39,7 +39,7 @@ function App() {
     }))
   }, [])
 
-  function handleLogoutClick() {
+  function handleLogOutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
@@ -50,8 +50,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBarLoggedOut />
-      <NavBarLoggedIn />
+      {user ? <NavBarLoggedIn handleLogOutClick={handleLogOutClick}/> : <NavBarLoggedOut />}
       <NavBar/>
       <Routes>
         <Route className="route" path="/" element={<Home />} />
@@ -61,7 +60,7 @@ function App() {
         <Route className="route" path="/contact" element={<Contact/>}/>
         <Route className="route" path="/log-in" element={<LogIn onLogin={setUser} isLoggedIn={!!user}/>} />
         <Route className="route" path="/sign-up" element={<SignUp onLogin={setUser} isLoggedIn={!!user} />} />
-        <Route className="route" path="/log-out" element={<LogOut handleLogOutClick={handleLogoutClick}/>}/>
+        <Route className="route" path="/log-out" element={<LogOut handleLogOutClick={handleLogOutClick}/>}/>
       </Routes>
     </div>
   );

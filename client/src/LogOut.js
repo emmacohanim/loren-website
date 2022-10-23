@@ -1,6 +1,6 @@
 import React from 'react';
 
-function LogOut() {
+function LogOut(handleLogOutClick) {
 
 }
 

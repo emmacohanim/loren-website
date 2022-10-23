@@ -34,7 +34,6 @@ function SignUp({onLogin, isLoggedIn}) {
     }
 
     function handleSubmit(e) {
-        debugger
         e.preventDefault()
         setErrors([])
         fetch("/signup", {
@@ -43,8 +42,8 @@ function SignUp({onLogin, isLoggedIn}) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                firstName,
-                lastName,
+                first_name: firstName,
+                last_name: lastName,
                 gender,
                 username,
                 password,

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { Form } from 'semantic-ui-react'
+import { Form, Button } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css'
 
 function LogIn({isLoggedIn, onLogin}) {
@@ -12,7 +12,7 @@ function LogIn({isLoggedIn, onLogin}) {
     const navigate = useNavigate()
     useEffect(()=>{
         if (isLoggedIn) {
-            navigate("/browse")
+            navigate("/")
         }
     }, [isLoggedIn])
 
@@ -68,6 +68,7 @@ function LogIn({isLoggedIn, onLogin}) {
                         />
                     </Form.Field>
                 </Form.Group>
+                <Button type="submit">Log In</Button>
             </Form>
         </div>
     )
