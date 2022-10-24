@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function MyAccount({onLogin, isLoggedIn}) {
-    const [accountInformation, setAccountInformation] = useState([])
-
-    useEffect(()=> {
-        fetch("/my_account")
-        .then(r=>r.json())
-        .then((data)=> {
-            setAccountInformation(data)
-            console.log(data)
-        })
-
-    }, [])
+function MyAccount({onLogin, isLoggedIn, accountInformation}) {
+    const navigate = useNavigate()
 
     function handleRender() {
         return (
@@ -19,9 +10,13 @@ function MyAccount({onLogin, isLoggedIn}) {
         )
     }
 
+    function handleEditClick() {
+        navigate("/my-account/edit")
+    }
+
     return (
         <div>
-            <button onClick={handleRender}>Edit Account</button>
+            <button onClick={handleEditClick}>Edit Account</button>
             <button onClick={handleRender}>Change Password</button>
             <h3>Account Information</h3>
             <p>First Name: {accountInformation.first_name}</p>

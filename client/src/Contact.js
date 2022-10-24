@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Radio, Checkbox, Dropdown } from "semantic-ui-react";
+import { Form, Button, Radio, Checkbox, Dropdown, Popup } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { sendForm, send } from "emailjs-com";
 import emailjs from "@emailjs/browser";
+import {useNavigate} from 'react-router-dom'
 
 // message is being sent, but nothing else is
 
@@ -19,6 +20,7 @@ function Contact() {
 
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
 
   var templateParams = {
     firstname: firstName,
@@ -61,8 +63,10 @@ function Contact() {
       )
       .then(
         function (response) {
-          console.log("SUCCESS!", response.status, response.text);
-          alert("Inquiry submitted!");
+          console.log("SUCCESS!", response.status, response.text)
+          alert("Inquiry submitted!")
+          navigate("/")
+
         },
         function (error) {
           console.log("FAILED...", error);
@@ -137,7 +141,7 @@ function Contact() {
           type="text"
           name="phone"
           placeholder="10-digit phone number"
-          label="Phone:"
+          label="Phone"
         />
         <div>
           <label>Preferred Method of Contact</label>

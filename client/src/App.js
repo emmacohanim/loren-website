@@ -24,11 +24,23 @@ function App() {
 
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const [accountInformation, setAccountInformation] = useState([])
+
+    useEffect(()=> {
+        fetch("/my_account")
+        .then(r=>r.json())
+        .then((data)=> {
+            setAccountInformation(data)
+            console.log(data)
+        })
+
+    }, [])
  
   useEffect(() => {
     fetch('/my_account').then(r=>r.json().then(data => {
       if (r.ok){
       setUser(data);
+      setAccountInformation(data);
       }
     }))
   }, [])
@@ -55,8 +67,8 @@ function App() {
         <Route className="route" path="/log-in" element={<LogIn onLogin={setUser} isLoggedIn={!!user}/>} />
         <Route className="route" path="/sign-up" element={<SignUp onLogin={setUser} isLoggedIn={!!user} />} />
         <Route className="route" path="/log-out" element={<LogOut handleLogOutClick={handleLogOutClick}/>}/>
-        <Route className="route" path="/my-account" element={<MyAccount onLogin={setUser} isLoggedIn={!!user} />} />
-        {/* <Routes className="route" path="/my-account/edit"  element={<EditAccount/>}/> */}
+        <Route className="route" path="/my-account" element={<MyAccount onLogin={setUser} isLoggedIn={!!user} accountInformation={accountInformation}/>} />
+        <Route className="route" path="/my-account/edit"  element={<EditAccount setUser={setUser} isLoggedIn={!!user} accountInformation={accountInformation} setAccountInformation={setAccountInformation}/>}/>
       </Routes>
     </div>
   );

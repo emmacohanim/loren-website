@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { Form, Button, Radio } from "semantic-ui-react";
+import { Form, Button, Radio, Dropdown } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css'
 import { useNavigate} from 'react-router-dom'
 
@@ -89,14 +89,25 @@ function SignUp({onLogin, isLoggedIn}) {
                         id="lastName"
                         />
                     </Form.Field>
-                    <Form.Field label='Gender' control='select' onChange={(e)=>handleChange(e, setGender)}>
-                        <option disabled value="">select gender</option>
-                        <option value='male'>Male</option>
-                        <option value='female'>Female</option>
-                        <option value='transgender'>Transgender</option>
-                        <option value='non-binary-non-confornming'>Non-binary/non-conforming</option>
-                        <option value='prefer-not-to-respond'>Prefer not to respond</option>
-                    </Form.Field>
+                    <Form.Field>
+          <label>Gender</label>
+          <Dropdown
+            onChange={(e, { value }) => {
+              setGender(value);
+            }}
+            options={[
+              { key: 1, text: "Male", value: "male" },
+              { key: 2, text: "Female", value: "female" },
+              { key: 3, text: "Nonbinary", value: "nonbinary" },
+              { key: 4, text: "Transgender", value: "transgender" },
+              { key: 5, text: "Other", value: "other" },
+              { key: 6, text: "Prefer not to respond", value: "prefer not to respond"}  
+            ]}
+            selection
+            value={gender}
+            placeholder="Gender"
+          />
+        </Form.Field>
                 </Form.Group>
                 <Form.Group>
                     <Form.Input
