@@ -13,7 +13,8 @@ import Contact from "./Contact";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import LogOut from "./LogOut";
-
+import MyAccount from "./MyAccount";
+import EditAccount from './EditAccount';
 
 function App() {
 
@@ -28,13 +29,6 @@ function App() {
     fetch('/my_account').then(r=>r.json().then(data => {
       if (r.ok){
       setUser(data);
-      // return (
-      //   <NavBarLoggedIn />
-      // )
-      // } else {
-      //   return (
-      //     <NavBarLoggedOut />
-      //   )
       }
     }))
   }, [])
@@ -56,11 +50,13 @@ function App() {
         <Route className="route" path="/" element={<Home />} />
         <Route className="route" path="/about" element={<About />} />
         <Route className="route" path="/services" element={<Services />} />
-        <Route className="route" path="/subscribe" element={<PurchaseSubscription/>}/>
+        <Route className="route" path="/subscribe" element={<PurchaseSubscription />}/>
         <Route className="route" path="/contact" element={<Contact/>}/>
         <Route className="route" path="/log-in" element={<LogIn onLogin={setUser} isLoggedIn={!!user}/>} />
         <Route className="route" path="/sign-up" element={<SignUp onLogin={setUser} isLoggedIn={!!user} />} />
         <Route className="route" path="/log-out" element={<LogOut handleLogOutClick={handleLogOutClick}/>}/>
+        <Route className="route" path="/my-account" element={<MyAccount onLogin={setUser} isLoggedIn={!!user} />} />
+        {/* <Routes className="route" path="/my-account/edit"  element={<EditAccount/>}/> */}
       </Routes>
     </div>
   );

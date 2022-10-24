@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Radio } from "semantic-ui-react";
+import { Form, Button, Radio, Checkbox, Dropdown } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { sendForm, send } from "emailjs-com";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 // message is being sent, but nothing else is
 
 function Contact() {
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,12 +16,6 @@ function Contact() {
   const [gender, setGender] = useState("");
   const [servicesInterestedIn, setServicesInterestedIn] = useState([]);
   const [message, setMessage] = useState("");
-  const [contactNumber, setContactNumber] = useState("000000");
-
-  const generateContactNumber = () => {
-    const numStr = "000000" + ((Math.random() * 1000000) | 0);
-    setContactNumber(numStr.substring(numStr.length - 6));
-  };
 
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,32 +32,43 @@ function Contact() {
     // user not receiving auto reply
     // gender dropdown not working
     // service dropdown not working
-}
+  };
 
   function handleChange(e, setterFunction) {
-    e.preventDefault()
+    e.preventDefault();
     setterFunction(e.target.value);
   }
 
+  const toggleService = (e, data) => {
+    if (servicesInterestedIn.find((s) => s === data.label)) {
+      setServicesInterestedIn(
+        servicesInterestedIn.filter((s) => s !== data.label)
+      );
+    } else {
+      setServicesInterestedIn((services) => [...services, data.label]);
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    generateContactNumber();
-    emailjs.send('contact-form', 'template_kpowdaa', templateParams, 'Ig-z_52Clt7y91Jng')
-    .then(function(response) {
-       console.log('SUCCESS!', response.status, response.text);
-       alert("Inquiry submitted!")
-    }, function(error) {
-       console.log('FAILED...', error);
-       alert({errors})
-    });
-    // sendForm("default_service", "template_kpowdaa", "#contact-form").then(
-    //   function (response) {
-    //     console.log("SUCCESS!", response.status, response.text);
-    //   },
-    //   function (error) {
-    //     console.log("FAILED...", error);
-    //   }
-    // );
+    console.log(templateParams);
+    emailjs
+      .send(
+        "contact-form",
+        "template_kpowdaa",
+        templateParams,
+        "Ig-z_52Clt7y91Jng"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          alert("Inquiry submitted!");
+        },
+        function (error) {
+          console.log("FAILED...", error);
+          alert({ errors });
+        }
+      );
   };
 
   return (
@@ -89,28 +93,33 @@ function Contact() {
           />
         </Form.Field>
         <Form.Field>
-          <select className="ui dropdown" id="gender-select" onSelect={(e) => setGender(e.target.value)}>
-            <option value="">Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="nonbinary">Nonbinary</option>
-            <option value="transgender">Transgender</option>
-            <option value="other">Other</option>
-            <option value="prefer not to answer">Prefer not to answer</option>
-          </select>
+          <label>Gender</label>
+          <Dropdown
+            onChange={(e, { value }) => {
+              setGender(value);
+            }}
+            options={[
+              { key: 1, text: "Male", value: "male" },
+              { key: 2, text: "Female", value: "female" },
+              { key: 3, text: "Nonbinary", value: "nonbinary" },
+              { key: 4, text: "Transgender", value: "transgender" },
+              { key: 5, text: "Other", value: "other" },
+              { key: 6, text: "Prefer not to respond", value: "prefer not to respond"}  
+            ]}
+            selection
+            value={gender}
+            placeholder="Gender"
+          />
         </Form.Field>
       </Form.Group>
       <Form.Group id="services-and-message">
         <label>Service(s) I'm inquiring about</label>
         <Form.Field>
-          <select name="services" multiple="" className="ui fluid dropdown">
-            <option value="">Services</option>
-            <option value="training-or-comp-prep">
-              Personal training/Competion Prep
-            </option>
-            <option value="motivational speaking">Motivational speaking</option>
-            <option value="mindfulness coaching">Mindfulness coaching</option>
-          </select>
+          <Checkbox label="Personal Training" onChange={toggleService}/>
+          <Checkbox label="Mindfulness Coaching" onChange={toggleService} />
+          <Checkbox label="Competition Prep" onChange={toggleService} />
+          <Checkbox label="Posing" onChange={toggleService} />
+          <Checkbox label="Motivational speaking" onChange={toggleService} />
         </Form.Field>
       </Form.Group>
       <Form.Group>
@@ -122,20 +131,13 @@ function Contact() {
           placeholder="Email"
           label="Email"
         />
-        {/* <Form.Input
-                        onChange={(e)=>handleChange(e, setEmailConfirmation)}
-                        value={emailConfirmation}
-                        type="text"
-                        name="email confirmation"
-                        placeholder="Confirm email"
-                    /> */}
         <Form.Input
           onChange={(e) => handleChange(e, setPhone)}
           value={phone}
           type="text"
           name="phone"
           placeholder="10-digit phone number"
-          label="Phone"
+          label="Phone:"
         />
         <div>
           <label>Preferred Method of Contact</label>
@@ -166,7 +168,6 @@ function Contact() {
           value={message}
         />
       </Form.Group>
-      <Form.Input type="hidden" name="contact-number" value={contactNumber} />
       <Button type="submit">Submit Inquiry</Button>
     </Form>
   );

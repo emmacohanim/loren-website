@@ -61,6 +61,7 @@ function LogIn({isLoggedIn, onLogin}) {
                     <Form.Field>
                         <Form.Input
                         onChange={(e)=>handleChange(e, setPassword)}
+                        type="password"
                         placeholder="Password"
                         value={password}
                         label="Password"

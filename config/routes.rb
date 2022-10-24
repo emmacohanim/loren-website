@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :packages, only: [:index, :show]
-  resources :subscriptions
+  resources :subscriptions, only: [:index, :show, :create]
   resources :services, only: [:index, :show]
-  resources :users, only: [:create, :update, :show]
+  resources :users, only: [:create, :update, :show, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
