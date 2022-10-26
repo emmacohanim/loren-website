@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_18_193217) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_222242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "package_id", null: false
+    t.bigint "transaction_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_line_items_on_package_id"
+    t.index ["transaction_id"], name: "index_line_items_on_transaction_id"
+  end
 
   create_table "packages", force: :cascade do |t|
     t.integer "number_of_sessions"
@@ -33,13 +42,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_193217) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "subscriptions", force: :cascade do |t|
+  create_table "transactions", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "package_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["package_id"], name: "index_subscriptions_on_package_id"
-    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,7 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_193217) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "line_items", "packages"
+  add_foreign_key "line_items", "transactions"
   add_foreign_key "packages", "services"
-  add_foreign_key "subscriptions", "packages"
-  add_foreign_key "subscriptions", "users"
+  add_foreign_key "transactions", "users"
 end

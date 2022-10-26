@@ -1,12 +1,17 @@
 /* issues
 semantic ui css is overriding body css
-need navbar to be sticky */
 
-body {
+need navbar to be sticky 
+
+yellow-green: #bfe92a
+blue: #2d2890
+grey text: #747c83*/
+
+body.body {
   margin-top: 20px;
   background-color: black;
   margin-bottom: 35px;
-  text-align: center;
+  color: #747c83;
 }
 
 #focus-logo-home {
@@ -18,21 +23,21 @@ body {
   padding: 0.5rem 1rem;
   margin: 0 1rem;
   text-decoration: none;
-  font-size: 1.2em;
-  color: rgb(0, 0, 0);
-  border-bottom: 2px solid rgb(0, 0, 0);
+  font-size: 25px;
+  color: #747c83;
   transition: 0.1s;
+  font-weight: bold;
 }
 
 .link-logged-in {
-  float: left;
+  float: right;
   padding: 0.5rem 1rem;
   margin: 0 1rem;
   text-decoration: none;
   font-size: 1.2em;
-  color: rgb(0, 0, 0);
-  border-bottom: 2px solid rgb(0, 0, 0);
+  color: #747c83;
   transition: 0.1s;
+  font-weight: bold;
 }
 
 .link-logged-out {
@@ -41,9 +46,21 @@ body {
   margin: 0 1rem;
   text-decoration: none;
   font-size: 1.2em;
-  color: rgb(0, 0, 0);
-  border-bottom: 2px solid rgb(0, 0, 0);
+  color: #747c83;
   transition: 0.1s;
+  font-weight: bold;
+}
+
+.link:hover {
+  color: white;
+}
+
+.link-logged-in:hover {
+  color: white;
+}
+
+.link-logged-out:hover {
+  color: white;
 }
 
 .service {
@@ -59,6 +76,16 @@ body {
   padding: 20px;
   color: white;
   font-size: large;
+}
+
+.error {
+  color: white;
+}
+
+/* forms */
+
+Form.form {
+  color: white;
 }
 
 /* Stripe CSS */

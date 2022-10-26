@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Form, Button } from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css'
+import "semantic-ui-css/semantic.min.css";
 
 function LogIn({isLoggedIn, onLogin}) {
 
@@ -71,6 +71,8 @@ function LogIn({isLoggedIn, onLogin}) {
                 </Form.Group>
                 <Button type="submit">Log In</Button>
             </Form>
+            <p>Don't have an account?</p>
+            <Button onClick={()=> navigate("/sign-up")}>Create Account</Button>
         </div>
     )
 }

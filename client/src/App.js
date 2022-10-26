@@ -25,6 +25,7 @@ function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [accountInformation, setAccountInformation] = useState([])
+  const [services, setServices] = useState([])
 
     useEffect(()=> {
         fetch("/my_account")
@@ -41,9 +42,17 @@ function App() {
       if (r.ok){
       setUser(data);
       setAccountInformation(data);
+      
       }
     }))
   }, [])
+
+  useEffect(() => {
+    fetch('/services')
+    .then(r=>r.json())
+    .then(data=> setServices(data))
+  },[])
+
 
   function handleLogOutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -54,6 +63,15 @@ function App() {
     })
   }
 
+  function renderErrors(errors) {
+    errors.map((err) => {
+      console.log(err)
+      return (
+      <p className="error">{err}</p>
+      )
+    } )
+  }
+
   return (
     <div className="App">
       {user ? <NavBarLoggedIn handleLogOutClick={handleLogOutClick}/> : <NavBarLoggedOut />}
@@ -61,11 +79,11 @@ function App() {
       <Routes>
         <Route className="route" path="/" element={<Home />} />
         <Route className="route" path="/about" element={<About />} />
-        <Route className="route" path="/services" element={<Services />} />
-        <Route className="route" path="/subscribe" element={<PurchaseSubscription />}/>
+        <Route className="route" path="/services" element={<Services services={services}/>} />
+        <Route className="route" path="/subscribe" element={<PurchaseSubscription isLoggedIn={!!user} services={services}/>}/>
         <Route className="route" path="/contact" element={<Contact/>}/>
-        <Route className="route" path="/log-in" element={<LogIn onLogin={setUser} isLoggedIn={!!user}/>} />
-        <Route className="route" path="/sign-up" element={<SignUp onLogin={setUser} isLoggedIn={!!user} />} />
+        <Route className="route" path="/log-in" element={<LogIn onLogin={setUser} isLoggedIn={!!user} renderErrors={renderErrors}/>} />
+        <Route className="route" path="/sign-up" element={<SignUp onLogin={setUser} isLoggedIn={!!user} renderErrors={renderErrors} />} />
         <Route className="route" path="/log-out" element={<LogOut handleLogOutClick={handleLogOutClick}/>}/>
         <Route className="route" path="/my-account" element={<MyAccount onLogin={setUser} isLoggedIn={!!user} accountInformation={accountInformation}/>} />
         <Route className="route" path="/my-account/edit"  element={<EditAccount setUser={setUser} isLoggedIn={!!user} accountInformation={accountInformation} setAccountInformation={setAccountInformation}/>}/>

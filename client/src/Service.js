@@ -10,7 +10,6 @@ return (
         <p>{service.description}</p>
         {service.duration_of_session_in_minutes ? <p>{service.duration_of_session_in_minutes} minutes per session</p> : null}
         {options.map(option=> {
-            console.log(option.price)
             return (
             <p>
                 {option.number_of_sessions ? <span>{option.number_of_sessions} session(s) |</span> : null}

@@ -8,9 +8,9 @@ function EditAccount({setUser, isLoggedIn, accountInformation, setAccountInforma
     function handleDeleteAccountClick() {
         fetch(`/users/${accountInformation.id}`, {
             method: 'DELETE',
-            // headers: {
-            //     'Content-Type': 'application/json',
-            // }
+            headers: {
+                'Content-Type': 'application/json',
+            }
         }
         ).then(()=> {
             setUser(null)

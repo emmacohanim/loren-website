@@ -1,17 +1,17 @@
 import React, { useState, useEffect} from 'react';
 import { Form, Button, Radio, Dropdown } from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css'
 import { useNavigate} from 'react-router-dom'
+import "semantic-ui-css/semantic.min.css";
 
 // state for all form values is set, but submitted form returns first/last name blank error
 // submit handler should be setting errors and rendering errors to user 
 
-function SignUp({onLogin, isLoggedIn}) {
+function SignUp({onLogin, isLoggedIn, renderErrors}) {
     const navigate = useNavigate();
 
     useEffect(()=>{
         if (isLoggedIn) {
-            navigate("/browse")
+            navigate("/")
         }
     }, [isLoggedIn])
 
@@ -60,16 +60,14 @@ function SignUp({onLogin, isLoggedIn}) {
               r.json().then((user) => onLogin(user));
             } else {
               r.json().then((err) => setErrors(err.errors))
-              return (
-              <p className="error">{errors}</p>
-              )
             }
           })
         }
+
     return (
         <div>
             <h2>Sign Up</h2>
-            <Form onSubmit={handleSubmit}>
+            <Form className='form' onSubmit={handleSubmit}>
                 <Form.Group id="first-last-gender">
                     <Form.Field>
                         <Form.Input
@@ -179,6 +177,9 @@ function SignUp({onLogin, isLoggedIn}) {
                 </Form.Group>
         <Button type="submit">Sign Up</Button>
       </Form>
+      {errors.map((err) => {
+                return <p className="error">{err}</p>
+            })}
     </div>
     )
 

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :line_items
+  resources :transactions
   resources :packages, only: [:index, :show]
   resources :subscriptions, only: [:index, :show, :create]
   resources :services, only: [:index, :show]
