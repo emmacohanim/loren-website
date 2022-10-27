@@ -11,10 +11,9 @@ body.body {
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
-  /* background-color: black; */
+  background-color: black;
   margin-bottom: 35px;
   /* color: #747c83; */
-  background: #1b1c1d;
   color: rgba(255, 255, 255, 0.9);
 }
 
@@ -102,10 +101,41 @@ Form.form#contact {
   color: black;
 }
 
+div.div#login {
+  background-color: #bfe92a;
+  padding: 10px;
+  color: black;
+}
+
 Button#contact {
   color: black;
   background-color: white;
 }
+
+Button.button#login {
+  background-color: white;
+  color: black;
+}
+
+Button.button#redirect-signup {
+  background-color: white;
+  color: black;
+}
+
+div.div#signup {
+  background-color: #bfe92a;
+  padding: 10px;
+  color: black;
+}
+
+Button#signup {
+  background-color: white;
+  color: black;
+}
+
+Form.message#message {
+}
+
 /* Stripe CSS */
 
 .card {

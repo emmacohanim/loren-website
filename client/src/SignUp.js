@@ -63,7 +63,7 @@ function SignUp({ onLogin, isLoggedIn, renderErrors }) {
   }
 
   return (
-    <div>
+    <div className="div" id="signup">
       <h2>Sign Up</h2>
       <Form className="form" onSubmit={handleSubmit}>
         <Form.Group id="first-last-gender">
@@ -177,7 +177,7 @@ function SignUp({ onLogin, isLoggedIn, renderErrors }) {
             />
           </div>
         </Form.Group>
-        <Button type="submit">Sign Up</Button>
+        <Button id="signup" type="submit">Sign Up</Button>
       </Form>
       {errors.map((err) => {
         return <p className="error">{err}</p>;

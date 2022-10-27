@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Popup } from "semantic-ui-react";
 
 function LogIn({ isLoggedIn, onLogin }) {
   const [username, setUsername] = useState("");
@@ -38,16 +38,15 @@ function LogIn({ isLoggedIn, onLogin }) {
         r.json().then((user) => onLogin(user));
       } else {
         r.json().then((err) => {
-          setErrors(errors);
-          console.log(errors);
+          setErrors(err.error.login);
         });
       }
     });
   }
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
+    <div className="div" id="login">
+      <Form className="form" id="login" onSubmit={handleSubmit}>
         <Form.Group id="login">
           <Form.Field>
             <Form.Input
@@ -66,16 +65,15 @@ function LogIn({ isLoggedIn, onLogin }) {
               value={password}
               label="Password"
               id="password"
+              classname="input"
             />
           </Form.Field>
         </Form.Group>
-        <Button type="submit">Log In</Button>
+        <Button className="button" id="login" type="submit">Log In</Button>
       </Form>
       <p>Don't have an account?</p>
-      <Button onClick={() => navigate("/sign-up")}>Create Account</Button>
-      {/* {errors.map((err) => {
-                return <p className="error">{err}</p>
-            })} */}
+      <Button className="button" id="redirect-signup" onClick={() => navigate("/sign-up")}>Create Account</Button>
+      {errors.length > 0 ? <p className="error">{errors}</p> : null}
     </div>
   );
 }
