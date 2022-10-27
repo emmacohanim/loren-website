@@ -63,14 +63,7 @@ function App() {
     })
   }
 
-  function renderErrors(errors) {
-    errors.map((err) => {
-      console.log(err)
-      return (
-      <p className="error">{err}</p>
-      )
-    } )
-  }
+  
 
   return (
     <div className="App">
@@ -82,8 +75,8 @@ function App() {
         <Route className="route" path="/services" element={<Services services={services}/>} />
         <Route className="route" path="/subscribe" element={<PurchaseSubscription isLoggedIn={!!user} services={services}/>}/>
         <Route className="route" path="/contact" element={<Contact/>}/>
-        <Route className="route" path="/log-in" element={<LogIn onLogin={setUser} isLoggedIn={!!user} renderErrors={renderErrors}/>} />
-        <Route className="route" path="/sign-up" element={<SignUp onLogin={setUser} isLoggedIn={!!user} renderErrors={renderErrors} />} />
+        <Route className="route" path="/log-in" element={<LogIn onLogin={setUser} isLoggedIn={!!user} />} />
+        <Route className="route" path="/sign-up" element={<SignUp onLogin={setUser} isLoggedIn={!!user} />} />
         <Route className="route" path="/log-out" element={<LogOut handleLogOutClick={handleLogOutClick}/>}/>
         <Route className="route" path="/my-account" element={<MyAccount onLogin={setUser} isLoggedIn={!!user} accountInformation={accountInformation}/>} />
         <Route className="route" path="/my-account/edit"  element={<EditAccount setUser={setUser} isLoggedIn={!!user} accountInformation={accountInformation} setAccountInformation={setAccountInformation}/>}/>

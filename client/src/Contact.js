@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Radio, Checkbox, Dropdown, Popup } from "semantic-ui-react";
+import { Form, Button, Radio, Checkbox, Dropdown, Popup, Label } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { sendForm, send } from "emailjs-com";
 import emailjs from "@emailjs/browser";
@@ -18,7 +18,7 @@ function Contact() {
   const [servicesInterestedIn, setServicesInterestedIn] = useState([]);
   const [message, setMessage] = useState("");
 
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
 
@@ -53,7 +53,6 @@ function Contact() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(templateParams);
     emailjs
       .send(
         "contact-form",
@@ -69,19 +68,20 @@ function Contact() {
 
         },
         function (error) {
-          console.log("FAILED...", error);
-          alert({ errors });
+          setErrors(error);
+          console.log(error);
         }
       );
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} className="form" id="contact" >
       <Form.Group id="first-last-gender">
         <Form.Field>
           <Form.Input
+            required
             onChange={(e) => handleChange(e, setFirstName)}
-            label="First Name"
+            label="First Name:"
             placeholder="First Name"
             value={firstName}
             id="firstName"
@@ -89,6 +89,7 @@ function Contact() {
         </Form.Field>
         <Form.Field>
           <Form.Input
+            required
             onChange={(e) => handleChange(e, setLastName)}
             placeholder="Last Name"
             value={lastName}
@@ -96,9 +97,11 @@ function Contact() {
             id="lastName"
           />
         </Form.Field>
-        <Form.Field>
+        <Form.Field required>
           <label>Gender</label>
+        
           <Dropdown
+            
             onChange={(e, { value }) => {
               setGender(value);
             }}
@@ -117,34 +120,38 @@ function Contact() {
         </Form.Field>
       </Form.Group>
       <Form.Group id="services-and-message">
-        <label>Service(s) I'm inquiring about</label>
+        <label><strong>Service(s) I'm inquiring about:</strong></label>
         <Form.Field>
-          <Checkbox label="Personal Training" onChange={toggleService}/>
-          <Checkbox label="Mindfulness Coaching" onChange={toggleService} />
-          <Checkbox label="Competition Prep" onChange={toggleService} />
-          <Checkbox label="Posing" onChange={toggleService} />
-          <Checkbox label="Motivational speaking" onChange={toggleService} />
+          <Checkbox className="checkbox" label="Personal Training" onChange={toggleService}/>
+          <Checkbox className="checkbox" label="Mindfulness Coaching" onChange={toggleService} />
+          <Checkbox className="checkbox" label="Competition Prep" onChange={toggleService} />
+          <Checkbox className="checkbox" label="Posing" onChange={toggleService} />
+          <Checkbox className="checkbox" label="Motivational speaking" onChange={toggleService} />
         </Form.Field>
       </Form.Group>
       <Form.Group>
         <Form.Input
+          required
           onChange={(e) => handleChange(e, setEmail)}
           value={email}
           type="text"
           name="email"
           placeholder="Email"
-          label="Email"
+          label="Email:"
+          id="email"
         />
         <Form.Input
+          required
           onChange={(e) => handleChange(e, setPhone)}
           value={phone}
           type="text"
           name="phone"
           placeholder="10-digit phone number"
-          label="Phone"
+          label="Phone:"
+          id="phone"
         />
         <div>
-          <label>Preferred Method of Contact</label>
+          <label><strong>Preferred Method of Contact: </strong></label>
           <Radio
             value="email"
             label="Email"
@@ -170,9 +177,10 @@ function Contact() {
           label="Message:"
           placeholder="Write your message here..."
           value={message}
+          id="message"
         />
       </Form.Group>
-      <Button type="submit">Submit Inquiry</Button>
+      <Button id="contact" type="submit">Submit Inquiry</Button>
     </Form>
   );
 }

@@ -1,5 +1,5 @@
 class Package < ApplicationRecord
     belongs_to :service
-    has_many :subscriptions
-    has_many :users, through: :subscriptions
+    has_many :line_items
+    has_many :transactions, through: :line_items
 end

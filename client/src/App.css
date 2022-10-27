@@ -8,14 +8,23 @@ blue: #2d2890
 grey text: #747c83*/
 
 body.body {
+  margin-left: 20px;
+  margin-right: 20px;
   margin-top: 20px;
-  background-color: black;
+  /* background-color: black; */
   margin-bottom: 35px;
-  color: #747c83;
+  /* color: #747c83; */
+  background: #1b1c1d;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 #focus-logo-home {
   width: 75%;
+}
+
+#navbar {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .link {
@@ -41,7 +50,7 @@ body.body {
 }
 
 .link-logged-out {
-  float: left;
+  float: right;
   padding: 0.5rem 1rem;
   margin: 0 1rem;
   text-decoration: none;
@@ -64,7 +73,7 @@ body.body {
 }
 
 .service {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 800px;
   margin-left: auto;
@@ -84,10 +93,19 @@ body.body {
 
 /* forms */
 
-Form.form {
+/* Form.Input {
   color: white;
+} */
+Form.form#contact {
+  background-color: #bfe92a;
+  padding: 10px;
+  color: black;
 }
 
+Button#contact {
+  color: black;
+  background-color: white;
+}
 /* Stripe CSS */
 
 .card {
@@ -98,7 +116,7 @@ Form.form {
   border: 1px solid #afafaf;
   box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
 }
-.pay-button{
+.pay-button {
   padding: 0.7rem 2rem;
   width: 100%;
   margin: 1rem 0;
@@ -112,15 +130,15 @@ Form.form {
   transition: box-shadow 500ms;
   cursor: pointer;
 }
-.pay-button:disabled{
+.pay-button:disabled {
   background-color: #afafaf;
   box-shadow: none;
   cursor: default;
 }
-.pay-button:disabled:hover{
+.pay-button:disabled:hover {
   box-shadow: none;
 }
-.pay-button:hover{
+.pay-button:hover {
   box-shadow: 2px 5px 15px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -150,7 +168,7 @@ Form.form {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-} 
+}
 
 .App-link {
   color: #61dafb;
