@@ -90,6 +90,12 @@ body.body {
   color: white;
 }
 
+#my-account {
+  background-color: #bfe92a;
+  padding: 10px;
+  color: black;
+}
+
 /* forms */
 
 /* Form.Input {
@@ -133,7 +139,20 @@ Button#signup {
   color: black;
 }
 
-Form.message#message {
+div.div#edit-account {
+  background-color: #bfe92a;
+  padding: 10px;
+  color: black;
+}
+
+Button.button#save-changes-btn {
+  background-color: white;
+  color: black;
+}
+
+Button.button#delete-acct-btn {
+  background-color: white;
+  color: black;
 }
 
 /* Stripe CSS */

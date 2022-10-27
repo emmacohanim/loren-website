@@ -15,9 +15,9 @@ function MyAccount({onLogin, isLoggedIn, accountInformation}) {
     }
 
     return (
-        <div>
-            <button onLogin={onLogin} isLoggedIn={isLoggedIn} onClick={handleEditClick}>Edit Account</button>
-            <button onClick={handleRender}>Change Password</button>
+        <div id="my-account">
+            <button id="edit-btn" onLogin={onLogin} isLoggedIn={isLoggedIn} onClick={handleEditClick}>Edit Account</button>
+            {/* <button id="change-password-btn" onClick={handleRender}>Change Password</button> */}
             <h3>Account Information</h3>
             <p>First Name: {accountInformation.first_name}</p>
             <p>Last Name: {accountInformation.last_name}</p>
